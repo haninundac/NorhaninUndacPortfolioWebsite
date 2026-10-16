@@ -1,0 +1,1506 @@
+@import url("https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=Chonburi&family=Quicksand:wght@400;500;600;700&display=swap");
+/* =========================================================
+   DESIGN SYSTEM: 60 - 30 - 10 RULE
+   60% Dominant  -> blush cream + white   (page background, open "slide" space)
+   30% Secondary -> deep burgundy         (hero, nav, stories, contact, footer, headings)
+   10% Accent    -> dusty rose            (buttons, hovers, active states, highlights)
+   ========================================================= */
+:root {
+  /* 60% Dominant */
+  --color-dominant: #f7eeea;
+  --color-paper: #fffdfb;
+  --color-dominant-soft: #efdcd7;
+
+  /* 30% Secondary */
+  --color-secondary: #6f1d25;
+  --color-secondary-dark: #581820;
+  --color-secondary-light: #8a2a33;
+
+  /* 10% Accent */
+  --color-accent: #e8b4ae;
+  --color-accent-strong: #d9948c;
+
+  /* Text */
+  --text-on-light: #3a1217;
+  --text-muted: #7a5a5d;
+  --text-on-dark: #fbf3ef;
+
+  /* Type */
+  --font-display: "Chonburi", Georgia, serif;
+  --font-body: "Quicksand", system-ui, -apple-system, sans-serif;
+
+  /* Layout */
+  --container: 1120px;
+  --radius: 10px;
+  --header-h: 68px;
+  --shadow: 0 12px 30px rgba(111, 29, 37, 0.18);
+  --transition: 0.3s ease;
+}
+
+/* ---------- Reset & base ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 12px); }
+
+body {
+  font-family: var(--font-body);
+  background: linear-gradient(180deg, var(--color-dominant) 0%, #ecd3ce 100%) fixed;
+  color: var(--text-on-light);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+ul { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+:focus-visible {
+  outline: 3px solid var(--color-accent-strong);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.container { width: min(100% - 1.5rem, var(--container)); margin-inline: auto; }
+
+main { padding-top: calc(var(--header-h) + 1.25rem); padding-bottom: 1.25rem; display: grid; gap: 1.25rem; }
+main > section, .about, .projects { scroll-margin-top: var(--header-h); }
+.about, .projects { display: grid; gap: 1.25rem; }
+
+/* ---------- Slides (each section is a "slide" card) ---------- */
+.slide {
+  position: relative;
+  border-radius: var(--radius);
+  padding: clamp(1.5rem, 4vw, 3.25rem);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.slide--white { background: #fff; }
+.slide--paper {
+  background:
+    radial-gradient(circle at 20% 15%, rgba(232, 180, 174, 0.18), transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(111, 29, 37, 0.06), transparent 40%),
+    var(--color-paper);
+}
+.slide--burgundy {
+  background:
+    radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.07), transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(0, 0, 0, 0.18), transparent 45%),
+    var(--color-secondary);
+  color: var(--text-on-dark);
+}
+.slide--gradient {
+  background: linear-gradient(180deg, #f3e6df 0%, #e6b9b3 100%);
+}
+
+/* ---------- Typography ---------- */
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 8vw, 4.75rem);
+  line-height: 1.02;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--color-secondary);
+}
+.display--center { text-align: center; }
+.display--light { color: var(--text-on-dark); }
+
+/* Title with thin lines on either side (Highlights / Stories) */
+.display--line {
+  display: flex; align-items: center; gap: 1rem;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  letter-spacing: 0.18em;
+  margin-bottom: 2rem;
+}
+.display--line::before, .display--line::after {
+  content: ""; flex: 1; height: 1px; background: currentColor; opacity: 0.55;
+}
+
+.subtitle {
+  text-align: center;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-secondary);
+  font-size: 1rem;
+  margin: 0.25rem 0 2rem;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.7rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform var(--transition), background var(--transition),
+              color var(--transition), box-shadow var(--transition);
+}
+.btn--accent { background: var(--color-accent); color: var(--color-secondary); }
+.btn--accent:hover {
+  background: #f3c9c4;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
+}
+.btn--ghost { border-color: var(--color-accent); color: var(--text-on-dark); }
+.btn--ghost:hover { background: var(--color-accent); color: var(--color-secondary); transform: translateY(-3px); }
+.btn--block { width: 100%; }
+
+/* ---------- Header / Nav ---------- */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  height: var(--header-h);
+  background: rgba(111, 29, 37, 0.97);
+  backdrop-filter: blur(8px);
+  transition: box-shadow var(--transition);
+}
+.site-header.scrolled { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.28); }
+
+.nav { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+
+.logo { font-family: var(--font-display); font-size: 1.5rem; color: var(--text-on-dark); letter-spacing: 0.04em; }
+.logo span { color: var(--color-accent); }
+
+.nav__menu {
+  position: fixed;
+  top: var(--header-h);
+  right: 0;
+  width: min(75%, 300px);
+  height: calc(100vh - var(--header-h));
+  background: var(--color-secondary-dark);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 1.5rem;
+  transform: translateX(100%);
+  transition: transform var(--transition);
+}
+.nav__menu.open { transform: translateX(0); }
+
+.nav__link {
+  color: var(--text-on-dark);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color var(--transition);
+}
+.nav__link::after {
+  content: "";
+  position: absolute; left: 0; bottom: 0;
+  width: 0; height: 2px;
+  background: var(--color-accent);
+  transition: width var(--transition);
+}
+.nav__link:hover, .nav__link.active { color: var(--color-accent); }
+.nav__link:hover::after, .nav__link.active::after { width: 100%; }
+
+/* Hamburger */
+.nav__toggle { display: flex; flex-direction: column; gap: 5px; background: none; border: 0; cursor: pointer; padding: 8px; }
+.nav__toggle span { width: 26px; height: 2px; background: var(--text-on-dark); border-radius: 2px; transition: transform var(--transition), opacity var(--transition); }
+.nav__toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav__toggle.open span:nth-child(2) { opacity: 0; }
+.nav__toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- Hero ---------- */
+.hero { display: flex; flex-direction: column; align-items: center; text-align: center; min-height: 80vh; padding-bottom: 1.5rem; }
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 13.5vw, 9.5rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  width: 100%;
+}
+
+.hero__stage { display: flex; flex-direction: column; align-items: center; margin: 1rem 0; width: 100%; }
+.hero__name {
+  font-weight: 500;
+  font-size: clamp(2rem, 9vw, 4.5rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: #fff;
+}
+.hero__photo {
+  width: min(70%, 300px);
+  margin: -0.4rem 0;
+  position: relative;
+  z-index: 2;
+  border-radius: 140px 140px var(--radius) var(--radius);
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+.hero__photo img { width: 100%; height: auto; }
+
+.hero__footer { margin-top: auto; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+.hero__handles { font-size: 0.95rem; opacity: 0.9; letter-spacing: 0.05em; }
+.hero__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.9rem; }
+
+/* ---------- About Me ---------- */
+.about__me { display: grid; gap: 2rem; align-items: center; }
+.about__text p { color: var(--text-muted); margin-top: 1.1rem; max-width: 46ch; font-weight: 500; }
+.about__text .display { margin-bottom: 1rem; }
+.about__photo { border-radius: 4px; overflow: hidden; box-shadow: var(--shadow); }
+.about__photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.philosophy {
+  margin-top: 1.5rem;
+  padding: 1.1rem 1.4rem;
+  border-left: 4px solid var(--color-accent-strong);
+  background: var(--color-dominant);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--color-secondary);
+}
+.philosophy cite { display: block; margin-top: 0.3rem; font-family: var(--font-body); font-size: 0.82rem; font-style: normal; color: var(--text-muted); }
+
+/* ---------- I Create ---------- */
+.create .display { margin-bottom: 2rem; }
+.create__grid { display: grid; gap: 1.75rem; align-items: center; }
+.create__photo { order: -1; justify-self: center; width: min(70%, 280px); border-radius: 140px 140px var(--radius) var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.create__photo img { width: 100%; }
+
+.pill {
+  display: inline-block;
+  background: var(--color-secondary);
+  color: var(--text-on-dark);
+  border-radius: 999px;
+  padding: 0.25rem 1.4rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.pill--title { display: block; text-align: center; margin-bottom: 1rem; }
+
+.pill-list { display: grid; gap: 0.55rem; }
+.pill-list li {
+  position: relative;
+  background: var(--color-secondary);
+  color: var(--text-on-dark);
+  text-align: center;
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+}
+.pill-list li:hover { background: var(--color-accent); color: var(--color-secondary); transform: translateX(6px); }
+
+/* ---------- Highlights (skills circles) ---------- */
+.highlights__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; justify-items: center; }
+
+.bubble {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.35rem;
+  width: min(100%, 170px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--color-dominant-soft);
+  color: var(--color-secondary);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 3px solid transparent;
+  transition: transform var(--transition), background var(--transition), color var(--transition), border-color var(--transition);
+}
+.bubble--solid { background: var(--color-secondary); color: var(--text-on-dark); }
+.bubble__icon { font-family: var(--font-display); font-size: 1.6rem; color: var(--color-accent-strong); }
+.bubble:hover { transform: scale(1.08) rotate(-3deg); border-color: var(--color-accent); }
+
+/* ---------- The Case (projects) ---------- */
+.case .display { margin-bottom: 0.5rem; }
+.case__grid { display: grid; gap: 1.5rem; }
+
+.case-card {
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  border: 1px solid var(--color-dominant-soft);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.case-card:hover { transform: translateY(-8px); box-shadow: var(--shadow); }
+.case-card__img { overflow: hidden; aspect-ratio: 16 / 11; }
+.case-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.case-card:hover .case-card__img img { transform: scale(1.08); }
+
+.case-card__body { padding: 1.25rem 1.4rem 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; flex: 1; }
+.case-card__body h3 { font-family: var(--font-display); font-weight: 400; color: var(--color-secondary); font-size: 1.3rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.case-card__body p { color: var(--text-muted); font-size: 0.93rem; font-weight: 500; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.tags li { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; padding: 0.15rem 0.7rem; border: 1px solid var(--color-secondary); border-radius: 999px; color: var(--color-secondary); }
+
+.link-arrow {
+  margin-top: auto;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  color: var(--color-secondary);
+  border-bottom: 2px solid var(--color-accent-strong);
+  align-self: flex-start;
+  padding-bottom: 2px;
+  transition: color var(--transition), border-color var(--transition);
+}
+.link-arrow:hover { color: var(--color-accent-strong); }
+.link-arrow span { display: inline-block; transition: transform var(--transition); }
+.link-arrow:hover span { transform: translateX(5px); }
+
+/* ---------- Stories ---------- */
+.stories__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; max-width: 760px; margin-inline: auto; }
+.story { position: relative; border-radius: 6px; overflow: hidden; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35); transition: transform var(--transition); }
+.story img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 9 / 16; }
+.story:hover { transform: translateY(-8px) rotate(-1.5deg); }
+.story__label {
+  position: absolute; inset: auto 0 0 0;
+  padding: 1.5rem 0.6rem 0.6rem;
+  text-align: center; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(transparent, rgba(88, 24, 32, 0.9));
+}
+
+/* ---------- Education ---------- */
+.education .display { margin-bottom: 2rem; }
+.education__grid { display: grid; gap: 1.25rem; }
+
+.cert {
+  background: var(--color-secondary);
+  color: var(--text-on-dark);
+  padding: 1.6rem;
+  border-radius: var(--radius);
+  display: flex; flex-direction: column; gap: 0.5rem;
+  transition: transform var(--transition);
+}
+.cert:hover { transform: translateY(-5px); }
+.cert__year { font-weight: 700; letter-spacing: 0.1em; color: var(--color-accent); }
+.cert h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.35rem; text-transform: uppercase; letter-spacing: 0.03em; }
+.cert p:not(.cert__year) { opacity: 0.85; font-size: 0.93rem; font-weight: 500; }
+.cert__badge {
+  align-self: flex-start; margin-top: 0.6rem;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  padding: 0.15rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+}
+
+/* ---------- Contact ---------- */
+.contact { display: grid; gap: 2.5rem; }
+.contact__info p { margin: 1.2rem 0 1.5rem; max-width: 46ch; opacity: 0.88; font-weight: 500; }
+
+.socials { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+.socials a {
+  display: inline-block;
+  padding: 0.45rem 1.1rem;
+  border: 2px solid var(--color-accent);
+  border-radius: 999px;
+  font-weight: 700; font-size: 0.85rem; letter-spacing: 0.05em;
+  transition: background var(--transition), color var(--transition);
+}
+.socials a:hover { background: var(--color-accent); color: var(--color-secondary); }
+
+.form { display: grid; gap: 1.1rem; background: rgba(255, 255, 255, 0.07); padding: 1.75rem; border-radius: var(--radius); }
+.form__group { display: flex; flex-direction: column; gap: 0.35rem; }
+.form label { font-weight: 700; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; }
+
+.form input, .form textarea {
+  font-family: inherit; font-size: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+  border: 2px solid transparent;
+  background: var(--color-dominant);
+  color: var(--text-on-light);
+  transition: border-color var(--transition);
+  resize: vertical;
+}
+.form input:focus, .form textarea:focus { outline: none; border-color: var(--color-accent-strong); }
+.form .invalid { border-color: #ff8a7a; }
+.form__error { color: #ffc2b8; min-height: 1.1em; font-size: 0.8rem; }
+.form__status { text-align: center; font-size: 0.95rem; min-height: 1.4em; }
+
+/* ---------- Footer ---------- */
+.footer { background: var(--color-secondary-dark); color: var(--text-on-dark); padding: 1.75rem 0; font-size: 0.9rem; margin-top: 1.25rem; }
+.footer__inner { display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; }
+.footer__links { display: flex; gap: 1.5rem; }
+.footer__links a { transition: color var(--transition); }
+.footer__links a:hover { color: var(--color-accent); }
+
+/* ---------- Scroll animation ---------- */
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  .fade-in { opacity: 1; transform: none; }
+}
+
+/* =========================================================
+   TABLET (>= 640px)
+   ========================================================= */
+@media (min-width: 640px) {
+  .case__grid { grid-template-columns: repeat(2, 1fr); }
+  .education__grid { grid-template-columns: repeat(2, 1fr); }
+  .highlights__grid { grid-template-columns: repeat(4, 1fr); }
+  .footer__inner { flex-direction: row; justify-content: space-between; }
+}
+
+/* =========================================================
+   DESKTOP (>= 900px)
+   ========================================================= */
+@media (min-width: 900px) {
+  .container { width: min(100% - 3rem, var(--container)); }
+
+  /* Nav */
+  .nav__toggle { display: none; }
+  .nav__menu {
+    position: static; width: auto; height: auto;
+    flex-direction: row; padding: 0; gap: 2rem;
+    transform: none; background: transparent;
+  }
+
+  /* Hero: name wraps around the photo, like the reference slide */
+  .hero { min-height: 92vh; align-items: stretch; text-align: center; }
+  .hero__stage { position: relative; flex: 1; display: block; margin: 0; }
+  .hero__photo {
+    position: absolute; left: 50%; bottom: -1.5rem; transform: translateX(-50%);
+    width: clamp(280px, 30vw, 360px); margin: 0;
+  }
+  .hero__name { position: absolute; font-size: clamp(2.5rem, 5.5vw, 4.5rem); }
+  .hero__name--first { left: 3%; top: 18%; z-index: 1; }
+  .hero__name--last { right: 3%; top: 42%; z-index: 3; }
+  .hero__footer { flex-direction: row; justify-content: space-between; align-items: flex-end; position: relative; z-index: 4; }
+  .hero__handles { text-align: left; }
+
+  /* About */
+  .about__me { grid-template-columns: 1.15fr 1fr; gap: 3rem; }
+  .about__photo { aspect-ratio: 4 / 5; max-height: 460px; }
+
+  /* I Create */
+  .create__grid { grid-template-columns: 1fr minmax(240px, 300px) 1fr; gap: 2.5rem; }
+  .create__photo { order: 0; width: 100%; }
+
+  /* Highlights */
+  .bubble { width: min(100%, 190px); }
+
+  /* Projects */
+  .case__grid { gap: 1.75rem; }
+
+  /* Contact */
+  .contact { grid-template-columns: 1fr 1.1fr; gap: 4rem; align-items: center; }
+}
+
+
+/* =========================================================
+   PIXEL LIPSTICK CURSOR
+   Sprite: images/cursor-lipstick.png (16 x 40 cells, 1 cell = 1px at
+   the default size). Only active on devices with a mouse / precise
+   pointer; script.js adds `.has-lipstick-cursor` once the sprite loads,
+   so the normal cursor is never hidden unless the custom one can show.
+   ========================================================= */
+:root {
+  --lipstick-h: 40px;               /* 32–48px works well; keep a multiple of 8 for crisp cells */
+}
+
+.lipstick-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2147483647;              /* above header, nav menu and everything else */
+  height: var(--lipstick-h);
+  width: calc(var(--lipstick-h) * 0.4); /* 16:40 sprite ratio, so it is never stretched */
+  pointer-events: none;             /* never blocks clicks, hovers or text selection */
+  user-select: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  will-change: transform;
+}
+.lipstick-cursor.is-visible { opacity: 1; }
+
+.lipstick-cursor__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: crisp-edges;     /* fallback */
+  image-rendering: pixelated;       /* keeps the chunky 8-bit edges */
+  transform-origin: 72% 0;          /* pivot on the lipstick tip so the hotspot never moves */
+  transition: transform 0.14s ease;
+}
+
+/* Hovering anything clickable: a small tilt, no scaling, so pixels stay square */
+.lipstick-cursor.is-hover .lipstick-cursor__img { transform: rotate(-14deg); }
+.lipstick-cursor.is-down  .lipstick-cursor__img { transform: rotate(-14deg) translateY(1px); }
+
+/* Mouse / trackpad only: hide the system cursor everywhere (incl. links, buttons, inputs) */
+@media (hover: hover) and (pointer: fine) {
+  html.has-lipstick-cursor,
+  html.has-lipstick-cursor * { cursor: none !important; }
+}
+
+/* Touch devices keep the default cursor and never see the custom one */
+@media (hover: none), (pointer: coarse) {
+  .lipstick-cursor { display: none !important; }
+}
+
+/* Reduced motion: no fades or tilt animation (the tilt state still applies instantly) */
+@media (prefers-reduced-motion: reduce) {
+  .lipstick-cursor,
+  .lipstick-cursor__img { transition: none; }
+}
+
+
+/* =========================================================
+   VINTAGE BURGUNDY COQUETTE THEME  (override layer)
+   Burgundy #6a1624 / cherry #8b1f33 / blush #f0c4c6 / ivory #f8efe3
+   Decorative images live in images/. Every decoration is a
+   pseudo-element behind the content (z-index -1, no pointer events).
+   ========================================================= */
+:root {
+  --color-dominant: #f8efe3;  --color-paper: #fcf6ec;  --color-dominant-soft: #f3e2d6;
+  --color-secondary: #6a1624; --color-secondary-dark: #4a0e19; --color-secondary-light: #8b1f33;
+  --color-accent: #f0c4c6;    --color-accent-strong: #d98f98;
+  --text-on-light: #3b0f18;   --text-muted: #7d5560;
+  --shadow: 0 12px 28px rgba(74, 14, 25, 0.18);
+  --lace-dark: radial-gradient(circle, rgba(106, 22, 36, 0.07) 1.2px, transparent 1.6px) 0 0 / 14px 14px;
+  --lace-light: radial-gradient(circle, rgba(240, 196, 198, 0.09) 1.2px, transparent 1.6px) 0 0 / 14px 14px;
+}
+body { background: linear-gradient(180deg, #f8efe3 0%, #f0d6d2 100%) fixed; }
+::selection { background: var(--color-accent); color: var(--color-secondary-dark); }
+
+/* ---- Slides: shared scrapbook framing ---- */
+.slide { --s: 0.55; isolation: isolate; outline-offset: -9px; }
+@media (min-width: 900px) { .slide { --s: 1; } }
+
+.slide::before {                       /* big decorative stickers */
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-repeat: no-repeat;
+}
+.slide::after {                        /* lace eyelet rows along top and bottom edge */
+  content: ""; position: absolute; inset: 5px 16px; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(circle, var(--eyelet, rgba(106, 22, 36, 0.3)) 1.6px, transparent 2px) 0 0 / 12px 6px repeat-x,
+    radial-gradient(circle, var(--eyelet, rgba(106, 22, 36, 0.3)) 1.6px, transparent 2px) 0 100% / 12px 6px repeat-x;
+}
+
+/* ---- Ivory slides: About, Skills, Projects, Education ---- */
+.slide--white, .slide--paper, .slide--gradient, .slide--burgundy.stories {
+  background: var(--lace-dark), linear-gradient(165deg, #fcf6ec 0%, #f8efe3 100%);
+  color: var(--text-on-light);
+  border: 2px solid var(--color-secondary);
+  outline: 1.5px dashed rgba(106, 22, 36, 0.35);
+  box-shadow: var(--shadow);
+}
+.slide--gradient { background: var(--lace-dark), linear-gradient(165deg, #fcf6ec 0%, #f6dcd8 100%); }
+.slide--burgundy.stories .display { color: var(--color-secondary); }
+
+/* ---- Burgundy slides: Hero, Contact ---- */
+.slide--burgundy:not(.stories) {
+  --eyelet: rgba(240, 196, 198, 0.4);
+  background:
+    var(--lace-light),
+    radial-gradient(ellipse at 20% 0%, rgba(155, 27, 48, 0.55), transparent 55%),
+    linear-gradient(160deg, #6a1624 0%, #4a0e19 100%);
+  border: 2px solid var(--color-accent-strong);
+  outline: 1.5px dashed rgba(240, 196, 198, 0.4);
+}
+
+/* ---- Per-section stickers (small on mobile, full size on desktop) ---- */
+.hero::before {
+  background-image: url("images/phone.png"), url("images/bow-blush.png"), url("images/glasses.png");
+  background-position: right 4% top -8px, left -14px top 4px, left 1.5% top 52%;
+  background-size: calc(100px * var(--s)) auto, calc(150px * var(--s)) auto, calc(120px * var(--s)) auto;
+}
+.contact::before {
+  background-image: url("images/bow-blush.png"), url("images/glasses.png");
+  background-position: right -12px top 4px, left 2% bottom 2%;
+  background-size: calc(150px * var(--s)) auto, calc(90px * var(--s)) auto;
+}
+.about__me::before {
+  background-image: url("images/bow.png"); background-position: left -28px top -22px;
+  background-size: calc(130px * var(--s)) auto;
+}
+.create::before {
+  background-image: url("images/bow.png"); background-position: right -28px top -22px;
+  background-size: calc(130px * var(--s)) auto;
+}
+.highlights::before {
+  background-image: url("images/bow.png"), url("images/glasses.png");
+  background-position: left -28px top -22px, right -10px bottom -8px;
+  background-size: calc(130px * var(--s)) auto, calc(110px * var(--s)) auto;
+}
+.case::before {
+  background-image: url("images/bow.png"), url("images/camera.png");
+  background-position: right -28px top -22px, left -16px bottom -12px;
+  background-size: calc(130px * var(--s)) auto, calc(120px * var(--s)) auto;
+}
+.stories::before {
+  background-image: url("images/can.png"); background-position: right 6px bottom -10px;
+  background-size: calc(90px * var(--s)) auto;
+}
+.education::before {
+  background-image: url("images/bow.png"), url("images/glasses.png");
+  background-position: left -28px top -22px, right -10px bottom -8px;
+  background-size: calc(130px * var(--s)) auto, calc(100px * var(--s)) auto;
+}
+/* On small screens keep only the corner pieces so text stays clear */
+@media (max-width: 899px) {
+  .hero::before { background-image: url("images/phone.png"), url("images/bow-blush.png"); }
+  .contact::before, .highlights::before, .case::before, .education::before { background-image: url("images/bow-blush.png"); }
+  .highlights::before, .case::before, .education::before { background-image: url("images/bow.png"); }
+}
+
+/* ---- Navigation: rich burgundy with a scalloped lace trim ---- */
+.site-header { background: linear-gradient(180deg, #5a1220 0%, #6a1624 100%); border-bottom: 2px solid var(--color-accent-strong); }
+.site-header::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 9px; pointer-events: none;
+  background: radial-gradient(circle at 9px 0, #6a1624 8px, transparent 8.5px) 0 0 / 18px 9px repeat-x;
+}
+
+/* ---- Footer: burgundy with scalloped top edge ---- */
+.footer {
+  position: relative; margin-top: 1.75rem;
+  background: var(--lace-light), linear-gradient(180deg, #5a1220, #4a0e19);
+  border-top: 3px double var(--color-accent-strong);
+}
+.footer::before {
+  content: ""; position: absolute; left: 0; right: 0; bottom: calc(100% + 3px); height: 9px; pointer-events: none;
+  background: radial-gradient(circle at 9px 100%, #5a1220 8px, transparent 8.5px) 0 0 / 18px 9px repeat-x;
+}
+
+/* ---- Scrapbook polaroid + washi tape on the About photo ---- */
+.about__photo {
+  position: relative; overflow: visible; background: #fffdfb;
+  padding: 10px 10px 36px; border-radius: 2px; transform: rotate(1.5deg);
+  box-shadow: 0 10px 24px rgba(74, 14, 25, 0.25);
+}
+.about__photo::before {
+  content: ""; position: absolute; top: -11px; left: 50%; width: 88px; height: 24px; z-index: 2; pointer-events: none;
+  transform: translateX(-50%) rotate(-3deg);
+  background: repeating-linear-gradient(45deg, rgba(240, 196, 198, 0.9) 0 8px, rgba(255, 253, 251, 0.65) 8px 16px);
+}
+
+
+/* =========================================================
+   LEOPARD-PRINT PAGE BACKGROUND  (uses images/download__10_.jpg)
+   Fixed full-viewport layer with `cover`: never stretched, works on
+   mobile (no background-attachment: fixed), sits behind everything.
+   ========================================================= */
+body { background: #4a0e19; }
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: url("images/download__10_.jpg") center / cover no-repeat;
+}
+
+/* Panels stand out clearly against the print */
+.slide--white, .slide--paper, .slide--gradient, .slide--burgundy.stories { box-shadow: 0 14px 34px rgba(20, 0, 6, 0.45); }
+.slide--burgundy:not(.stories) { box-shadow: 0 14px 34px rgba(20, 0, 6, 0.55); }
+.footer { box-shadow: 0 -6px 24px rgba(20, 0, 6, 0.4); }
+
+/* ---- Vintage telephone hangs into the Contact panel ---- */
+.contact::before {
+  background-image: url("images/phone.png"), url("images/bow-blush.png"), url("images/glasses.png");
+  background-position: left 4% top -4px, right -12px top 4px, left 2% bottom 2%;
+  background-size: calc(72px * var(--s)) auto, calc(150px * var(--s)) auto, calc(90px * var(--s)) auto;
+}
+@media (max-width: 899px) {
+  .contact::before {
+    background-image: url("images/phone.png"), url("images/bow-blush.png");
+    background-position: right 100px top -4px, right -12px top 4px;
+    background-size: calc(80px * var(--s)) auto, calc(150px * var(--s)) auto;
+  }
+}
+
+
+
+/* =========================================================
+   FULL-PAGE SCRAPBOOK PATTERN  (images/page-pattern.png)
+   Glasses, lace bows, telephones and Polaroid cameras scattered
+   over the leopard print and repeated down the whole page.
+   It sits behind every panel, so text and buttons are never covered.
+   ========================================================= */
+body { position: relative; }
+body::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: url("images/page-pattern.png") center top / clamp(560px, 70vw, 960px) auto repeat;
+}
+/* More breathing room between panels so the pattern shows through */
+main { gap: clamp(2rem, 5vw, 3.5rem); }
+
+/* FINISHING TOUCHES: scrapbook-page framing so panels sit on the pattern */
+.slide--white, .slide--paper, .slide--gradient, .slide--burgundy.stories {
+  box-shadow: 0 0 0 6px rgba(240, 196, 198, 0.22), 0 16px 36px rgba(20, 0, 6, 0.5);
+}
+.slide--burgundy:not(.stories) {
+  box-shadow: 0 0 0 6px rgba(240, 196, 198, 0.2), 0 16px 36px rgba(20, 0, 6, 0.6);
+}
+@media (min-width: 1200px) { :root { --container: 1040px; } }
+@media (min-width: 1500px) { body::after { background-size: 1100px auto; } } 
+
+/* ===== Burgundy pixel lipstick cursor ===== */
+.pixel-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2147483647;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  opacity: 0;
+  will-change: transform;
+  transition: opacity 0.15s ease;
+}
+.pixel-cursor.is-visible { opacity: 1; }
+
+@media (hover: hover) and (pointer: fine) {
+  html.has-pixel-cursor,
+  html.has-pixel-cursor * { cursor: none !important; }
+}
+@media (hover: none), (pointer: coarse) {
+  .pixel-cursor { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pixel-cursor { transition: none; }
+}
+
+
+/* =========================================================
+   LACE POLAROID FRAMES
+   Cream scrapbook paper, dotted lace stitching and hibiscus corners,
+   drawn in pure CSS (no image files needed). Used by every photo:
+   hero, About pair, About-me photo, project thumbnails and stories.
+   ========================================================= */
+:root {
+  --paper-1: #fdf8ec;
+  --paper-2: #f3e5ca;
+  --paper-line: rgba(150, 105, 55, 0.5);
+  --hib-red: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='-34%20-34%2068%2068'%3E%3Cg%20fill='%23c9455a'%20stroke='%238b1f33'%20stroke-width='1.1'%20stroke-linejoin='round'%3E%3Cpath%20d='M0%200C-15-6-19-26-3-30C4-31%2014-27%2010-13C8-6%203-2%200%200Z'%20transform='rotate%280%29'/%3E%3Cpath%20d='M0%200C-15-6-19-26-3-30C4-31%2014-27%2010-13C8-6%203-2%200%200Z'%20transform='rotate%2872%29'/%3E%3Cpath%20d='M0%200C-15-6-19-26-3-30C4-31%2014-27%2010-13C8-6%203-2%200%200Z'%20transform='rotate%28144%29'/%3E%3Cpath%20d='M0%200C-15-6-19-26-3-30C4-31%2014-27%2010-13C8-6%203-2%200%200Z'%20transform='rotate%28216%29'/%3E%3Cpath%20d='M0%200C-15-6-19-26-3-30C4-31%2014-27%2010-13C8-6%203-2%200%200Z'%20transform='rotate%28288%29'/%3E%3C/g%3E%3Ccircle%20r='5.5'%20fill='%235a1220'/%3E%3Cpath%20d='M0%200L15%20-17'%20stroke='%23c99a3c'%20stroke-width='1.6'%20fill='none'%20stroke-linecap='round'/%3E%3Ccircle%20cx='15'%20cy='-17'%20r='2.4'%20fill='%23f0c15a'/%3E%3Ccircle%20cx='11'%20cy='-21'%20r='1.6'%20fill='%23f0c15a'/%3E%3C/svg%3E");
+  --hib-cream: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='-34%20-34%2068%2068'%3E%3Cg%20fill='%23f8edd6'%20stroke='%23d9c296'%20stroke-width='1.1'%20stroke-linejoin='round'%3E%3Cpath%20d='M0%200C-15-6-19-26-3-30C4-31%2014-27%2010-13C8-6%203-2%200%200Z'%20transform='rotate%280%29'/%3E%3Cpath%20d='M0%200C-15-6-19-26-3-30C4-31%2014-27%2010-13C8-6%203-2%200%200Z'%20transform='rotate%2872%29'/%3E%3Cpath%20d='M0%200C-15-6-19-26-3-30C4-31%2014-27%2010-13C8-6%203-2%200%200Z'%20transform='rotate%28144%29'/%3E%3Cpath%20d='M0%200C-15-6-19-26-3-30C4-31%2014-27%2010-13C8-6%203-2%200%200Z'%20transform='rotate%28216%29'/%3E%3Cpath%20d='M0%200C-15-6-19-26-3-30C4-31%2014-27%2010-13C8-6%203-2%200%200Z'%20transform='rotate%28288%29'/%3E%3C/g%3E%3Ccircle%20r='5.5'%20fill='%23e3a199'/%3E%3Cpath%20d='M0%200L15%20-17'%20stroke='%23c99a3c'%20stroke-width='1.6'%20fill='none'%20stroke-linecap='round'/%3E%3Ccircle%20cx='15'%20cy='-17'%20r='2.4'%20fill='%23e8b04a'/%3E%3Ccircle%20cx='11'%20cy='-21'%20r='1.6'%20fill='%23e8b04a'/%3E%3C/svg%3E");
+}
+
+.polaroid, .story {
+  --tilt: -2deg;
+  --hib: 1;
+  position: relative;
+  padding: 12px 12px 38px;
+  background:
+    radial-gradient(circle, rgba(168, 125, 70, 0.16) 1px, transparent 1.4px) 0 0 / 10px 10px,
+    linear-gradient(160deg, var(--paper-1) 0%, var(--paper-2) 100%);
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px rgba(150, 105, 55, 0.28), 0 16px 30px rgba(20, 0, 6, 0.5);
+  rotate: var(--tilt);
+  overflow: visible;
+  transition: rotate 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+}
+/* dotted lace stitching just inside the paper edge */
+.polaroid::before, .story::before {
+  content: ""; position: absolute; inset: 5px; z-index: 1; pointer-events: none;
+  border: 1.5px dotted var(--paper-line); border-radius: 4px;
+}
+/* the photo "window" with a little mat around it */
+.polaroid > img, .story > img {
+  display: block; width: 100%; border-radius: 2px;
+  box-shadow: 0 0 0 3px #fffaf0, 0 0 0 4px rgba(150, 105, 55, 0.35);
+}
+/* hibiscus pair pinned to a corner (cream one behind, red one in front) */
+.polaroid::after, .story:nth-child(odd)::after {
+  content: ""; position: absolute; z-index: 3; pointer-events: none;
+  top: calc(-18px * var(--hib)); right: calc(-18px * var(--hib));
+  width: calc(74px * var(--hib)); height: calc(64px * var(--hib));
+  background:
+    var(--hib-red) 100% 100% / calc(46px * var(--hib)) calc(46px * var(--hib)) no-repeat,
+    var(--hib-cream) 0 0 / calc(54px * var(--hib)) calc(54px * var(--hib)) no-repeat;
+  filter: drop-shadow(0 3px 4px rgba(20, 0, 6, 0.4));
+}
+.polaroid--alt::after { right: auto; left: calc(-18px * var(--hib)); transform: scaleX(-1); }
+
+/* handwritten-style caption on the bottom strip */
+.polaroid figcaption, .story .story__label {
+  position: absolute; inset: auto 0 10px 0; padding: 0; z-index: 2;
+  background: none; text-align: center; color: var(--color-secondary);
+  font-family: var(--font-display); font-size: 0.68rem; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase;
+}
+
+.polaroid:not(.hero__photo):hover { rotate: 0deg; transform: translateY(-6px); box-shadow: 0 0 0 1px rgba(150,105,55,.28), 0 22px 36px rgba(20, 0, 6, 0.55); }
+
+/* ---- Hero photo ---- */
+.hero__photo.polaroid { --tilt: -1.5deg; border-radius: 6px; overflow: visible; }
+.hero__photo.polaroid img { height: auto; }
+@media (min-width: 900px) {
+  /* centre with auto margins instead of translateX, so .fade-in.visible can't push it off-centre */
+  .hero__photo.polaroid { left: 0; right: 0; margin-inline: auto; transform: none; bottom: -1.5rem; }
+}
+
+/* ---- About: two polaroids side by side, stitched together like the reference ---- */
+.about__photos { display: flex; align-items: center; justify-content: center; padding: 14px 10px 6px; }
+.about__photos .polaroid { flex: 1 1 0; min-width: 0; --hib: 0.7; padding: 9px 9px 32px; }
+.about__photos .polaroid > img { aspect-ratio: 4 / 5; object-fit: cover; }
+.about__photos .polaroid:first-child { --tilt: -3deg; }
+.about__photos .polaroid:last-child { --tilt: 2.5deg; margin-top: 26px; }
+.stitch {
+  flex: 0 0 22px; align-self: stretch; margin: 34px -5px 12px; position: relative; z-index: 2;
+  background:
+    radial-gradient(circle, #2a0c10 2.3px, transparent 3px) 28% 0 / 100% 15px repeat-y,
+    radial-gradient(circle, #2a0c10 2.3px, transparent 3px) 72% 0 / 100% 15px repeat-y,
+    linear-gradient(135deg, transparent 44%, rgba(255, 250, 240, 0.95) 44% 56%, transparent 56%) 0 0 / 100% 15px repeat-y,
+    linear-gradient(45deg, transparent 44%, rgba(255, 250, 240, 0.95) 44% 56%, transparent 56%) 0 0 / 100% 15px repeat-y,
+    linear-gradient(180deg, var(--paper-1), var(--paper-2));
+  border-radius: 3px; box-shadow: 0 4px 10px rgba(20, 0, 6, 0.35);
+}
+@media (min-width: 900px) {
+  .about__photos .polaroid { --hib: 0.85; padding: 12px 12px 38px; }
+}
+
+/* ---- About me: centre photo ---- */
+.create__photo.polaroid { border-radius: 6px; overflow: visible; --tilt: 2deg; }
+.create__photo.polaroid img { aspect-ratio: 5 / 6; object-fit: cover; }
+
+/* ---- Project cards: photo sits in a lace mat ---- */
+.case-card__img {
+  position: relative; overflow: visible; aspect-ratio: auto; padding: 12px 12px 14px;
+  background:
+    radial-gradient(circle, rgba(168, 125, 70, 0.16) 1px, transparent 1.4px) 0 0 / 10px 10px,
+    linear-gradient(160deg, var(--paper-1), var(--paper-2));
+  border-bottom: 1.5px dotted var(--paper-line);
+}
+.case-card__img img { aspect-ratio: 16 / 11; border-radius: 2px; box-shadow: 0 0 0 3px #fffaf0, 0 0 0 4px rgba(150, 105, 55, 0.35); }
+.case-card:hover .case-card__img img { transform: none; }
+.case-card__img::after {
+  content: ""; position: absolute; z-index: 3; pointer-events: none; top: 0; right: 2px; width: 62px; height: 54px;
+  background: var(--hib-red) 100% 100% / 40px 40px no-repeat, var(--hib-cream) 0 0 / 46px 46px no-repeat;
+  filter: drop-shadow(0 3px 4px rgba(20, 0, 6, 0.35));
+}
+.case-card:nth-child(even) .case-card__img::after { right: auto; left: 2px; transform: scaleX(-1); }
+
+/* ---- Stories: three polaroids with alternating tilt ---- */
+.stories__grid { gap: 1.1rem; padding: 12px 4px; }
+.story { --hib: 0.8; padding: 9px 9px 32px; }
+.story:nth-child(1) { --tilt: -3deg; }
+.story:nth-child(2) { --tilt: 2deg; margin-top: 14px; }
+.story:nth-child(3) { --tilt: -1.5deg; }
+.story:hover { transform: translateY(-8px); rotate: 0deg; }
+.story:nth-child(3)::after { right: auto; left: calc(-18px * var(--hib)); transform: scaleX(-1); }
+@media (min-width: 900px) { .story { --hib: 1; padding: 12px 12px 38px; } }
+
+
+/* =========================================================
+   LACE FRAME ON EVERY PAGE SECTION
+   Each section is a cream lace frame with a white window inside,
+   hibiscus on a corner and dotted stitching, and the sections are
+   joined by stitched eyelet seams, like the scrapbook reference.
+   ========================================================= */
+:root {
+  --bw: clamp(14px, 2.4vw, 22px);      /* thickness of the cream frame */
+  --seam-h: 44px;                       /* gap between sections = height of the stitched seam */
+  --seam-tile: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='22'%20height='44'%20viewBox='0%200%2022%2044'%3E%3Cg%20stroke='%23fffaf0'%20stroke-width='1.7'%20stroke-linecap='round'%3E%3Cpath%20d='M11%2012L22%2022M0%2022L11%2032M11%2032L22%2022M0%2022L11%2012'/%3E%3C/g%3E%3Cg%3E%3Ccircle%20cx='11'%20cy='12'%20r='3.6'%20fill='%23fffaf0'/%3E%3Ccircle%20cx='11'%20cy='12'%20r='2.2'%20fill='%232a0c10'/%3E%3Ccircle%20cx='11'%20cy='32'%20r='3.6'%20fill='%23fffaf0'/%3E%3Ccircle%20cx='11'%20cy='32'%20r='2.2'%20fill='%232a0c10'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+main, .about, .projects { gap: calc(var(--seam-h) / 2); }   /* two half-gaps around a 0-height seam row = one --seam-h gap */
+
+main .slide.slide {
+  --hs: 0.7;
+  --in-dots: radial-gradient(circle, rgba(106, 22, 36, 0.05) 1.2px, transparent 1.6px);
+  --in-grad: linear-gradient(165deg, #ffffff 0%, #fffaf3 100%);
+  --fr-dots: radial-gradient(circle, rgba(168, 125, 70, 0.26) 1.3px, transparent 1.7px);
+  --fr-grad: linear-gradient(160deg, #fdf8ec 0%, #f1e1c2 100%);
+  --pos-red: right 6px top 8px;
+  --pos-cream: right calc(46px * var(--hs)) top 0;
+
+  border: var(--bw) solid transparent;
+  border-radius: 24px;
+  background-image: var(--hib-red), var(--hib-cream), var(--in-dots), var(--in-grad), var(--fr-dots), var(--fr-grad);
+  background-size: calc(62px * var(--hs)) calc(62px * var(--hs)), calc(76px * var(--hs)) calc(76px * var(--hs)), 14px 14px, auto, 10px 10px, auto;
+  background-position: var(--pos-red), var(--pos-cream), 0 0, 0 0, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat, repeat, no-repeat;
+  background-origin: border-box;
+  background-clip: border-box, border-box, padding-box, padding-box, border-box, border-box;
+  background-color: transparent;
+  /* dotted stitching running through the middle of the cream frame */
+  outline: 2px dotted rgba(150, 105, 55, 0.65);
+  outline-offset: calc(var(--bw) / -2 - 1px);
+  color: var(--text-on-light);
+  box-shadow:
+    inset 0 0 0 1.5px rgba(150, 105, 55, 0.4),
+    inset 0 8px 18px rgba(90, 60, 30, 0.16),
+    0 0 0 6px rgba(240, 196, 198, 0.2),
+    0 18px 38px rgba(20, 0, 6, 0.55);
+}
+@media (min-width: 900px) { main .slide.slide { --hs: 1; } }
+
+/* soft blush-to-white window for the About me slide */
+main .slide.slide--gradient { --in-grad: linear-gradient(165deg, #fffdfb 0%, #fbe3e0 100%); }
+
+/* burgundy windows for the Hero and Contact slides (still framed in cream) */
+main .slide.slide--burgundy:not(.stories) {
+  --in-dots: radial-gradient(circle, rgba(240, 196, 198, 0.1) 1.2px, transparent 1.6px);
+  --in-grad: linear-gradient(160deg, #7a1a2c 0%, #4a0e19 100%);
+  color: var(--text-on-dark);
+}
+
+/* flowers swap sides on alternating sections */
+main .slide.about__me, main .slide.highlights, main .slide.stories, main .slide.contact {
+  --pos-red: left 6px top 8px;
+  --pos-cream: left calc(46px * var(--hs)) top 0;
+}
+/* keep the hero flowers a bit smaller so they clear the big title */
+main .slide.hero { --hs: 0.55; }
+@media (min-width: 900px) { main .slide.hero { --hs: 0.8; } }
+
+/* ---- Stitched eyelet seam between sections ---- */
+.seam { position: relative; height: 0; pointer-events: none; z-index: 2; }
+.seam::before {
+  content: ""; position: absolute; top: calc(var(--seam-h) / -2); height: var(--seam-h);
+  left: 0; right: 0; width: min(84%, 780px); margin-inline: auto;
+  background-image: var(--seam-tile), linear-gradient(180deg, #fdf8ec, #f1e1c2);
+  background-size: 22px 44px, auto;
+  background-repeat: repeat-x, no-repeat;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(150, 105, 55, 0.35), 0 5px 12px rgba(20, 0, 6, 0.4);
+}
+
+/* hero polaroid a touch narrower so it never touches the first/last name */
+@media (min-width: 900px) {
+  .hero__photo.polaroid { width: clamp(250px, 24vw, 310px); }
+}
+
+/* ---- Phone tweaks for the framed sections ---- */
+@media (max-width: 899px) {
+  main .slide.slide { padding-top: calc(clamp(1.5rem, 4vw, 3.25rem) + 1.4rem); }
+  /* stacked hero: give the polaroid room so it never covers the name */
+  .hero__photo.polaroid { margin: 1.1rem 0; }
+  /* story captions stay inside their small polaroids */
+  .story .story__label { inset: auto 2px 9px 2px; font-size: 0.5rem; letter-spacing: 0.05em; line-height: 1.2; }
+}
+
+/* =========================================================
+   HERO NAME SCRIPT  (Ballet calligraphy "Hanin Undac")
+   ========================================================= */
+.hero .hero__name {
+  font-family: "Ballet", "Snell Roundhand", "Apple Chancery", "Segoe Script", "Brush Script MT", "Lucida Handwriting", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  text-transform: none;          /* script letters look best in normal case */
+  letter-spacing: 0.01em;
+  line-height: 1;
+  font-size: clamp(3.8rem, 17vw, 5.8rem);   /* Ballet runs small, so it is set large */
+  color: #fff4ee;
+  text-shadow:
+    0 2px 0 rgba(74, 14, 25, 0.55),            /* tiny lift off the burgundy */
+    0 0 18px rgba(240, 196, 198, 0.55),        /* blush glow */
+    0 0 38px rgba(240, 196, 198, 0.25);
+}
+@media (min-width: 900px) {
+  .hero .hero__name { font-size: clamp(4.6rem, 8.4vw, 7.2rem); }
+  .hero .hero__name--first { left: 4%; top: 14%; }
+  .hero .hero__name--last  { right: 4%; top: 40%; }
+}
+
+/* =========================================================
+   BALLET HEADINGS EVERYWHERE
+   Ballet is a delicate calligraphy face, so it is used for every
+   title, heading, name and caption, set larger and in normal case.
+   Body text, nav links, form labels and buttons stay in Quicksand
+   so the page remains easy to read.
+   ========================================================= */
+:root {
+  --font-display: "Ballet", "Snell Roundhand", "Apple Chancery", "Segoe Script", "Brush Script MT", cursive;
+}
+
+/* big section titles: About Me, I Create, The Case, Education, Let's Talk */
+.display {
+  text-transform: none; letter-spacing: 0; line-height: 1.15; font-optical-sizing: auto;
+  font-size: clamp(3.4rem, 10vw, 6.2rem);
+}
+/* titles with the thin lines either side: Skills, Stories */
+.display--line { font-size: clamp(2.6rem, 6vw, 3.6rem); letter-spacing: 0; }
+
+/* cover title */
+.hero__title { text-transform: none; letter-spacing: 0; line-height: 1.1; font-size: clamp(4rem, 16vw, 10.5rem); }
+
+.logo { font-size: 2.3rem; letter-spacing: 0; line-height: 1; }
+.subtitle { text-transform: none; letter-spacing: 0.02em; font-size: clamp(1.7rem, 4vw, 2.1rem); }
+
+.philosophy { font-size: clamp(1.6rem, 3.4vw, 1.9rem); line-height: 1.3; }
+.philosophy cite { font-size: 0.85rem; }   /* the small credit line stays in the readable body font */
+
+.pill { text-transform: none; letter-spacing: 0.01em; font-size: 1.8rem; line-height: 1.2; padding: 0.05rem 1.4rem; }
+
+.case-card__body h3, .cert h3 { text-transform: none; letter-spacing: 0; line-height: 1.1; font-size: clamp(1.9rem, 4vw, 2.2rem); }
+
+/* polaroid and story captions */
+.polaroid figcaption, .story .story__label { text-transform: none; letter-spacing: 0; font-size: 1.25rem; line-height: 1; bottom: 9px; }
+@media (max-width: 899px) {
+  .story .story__label { font-size: 1.05rem; letter-spacing: 0; line-height: 1; }
+  .about__photos .polaroid figcaption { font-size: 1.1rem; }
+}
+
+/* skill icons like </> and # need a normal font to stay legible */
+.bubble__icon { font-family: var(--font-body); font-weight: 700; }
+
+/* =========================================================
+   HERO: remove flowers + cute name layout
+   ========================================================= */
+
+/* ---- 1. Remove the hibiscus flowers from the hero ---- */
+main .slide.hero {
+  background-image: var(--in-dots), var(--in-grad), var(--fr-dots), var(--fr-grad);
+  background-size: 14px 14px, auto, 10px 10px, auto;
+  background-position: 0 0, 0 0, 0 0, 0 0;
+  background-repeat: repeat, no-repeat, repeat, no-repeat;
+  background-clip: padding-box, padding-box, border-box, border-box;
+}
+.hero__photo.polaroid::after { display: none; }   /* flowers on the photo corner */
+
+/* the lace bow sticker in the hero's top-left corner */
+.hero::before {
+  background-image: url("images/phone.png"), url("images/glasses.png");
+  background-position: right 4% top -8px, left 1.5% top 52%;
+  background-size: calc(100px * var(--s)) auto, calc(120px * var(--s)) auto;
+}
+@media (max-width: 899px) {
+  .hero::before {
+    background-image: url("images/phone.png");
+    background-position: right 4% top -8px;
+    background-size: calc(100px * var(--s)) auto;
+  }
+}
+
+/* ---- 2. Cute name layout ---- */
+.hero .hero__stage .hero__name {
+  position: relative;
+  color: #fff4ee;
+  text-shadow:
+    0 2px 0 rgba(74, 14, 25, 0.55),
+    0 0 18px rgba(240, 196, 198, 0.7),
+    0 0 42px rgba(240, 196, 198, 0.35);
+}
+
+/* little sparkle and heart beside each name */
+.hero .hero__stage .hero__name::before,
+.hero .hero__stage .hero__name::after {
+  position: absolute;
+  font-family: var(--font-body);
+  font-size: 0.3em;
+  color: var(--color-accent);
+  text-shadow: none;
+  line-height: 1;
+}
+.hero .hero__stage .hero__name--first::after { content: "♡"; top: 0.05em; right: -0.55em; transform: rotate(14deg); }
+.hero .hero__stage .hero__name--last::before { content: "✦"; bottom: 0.2em; left: -0.6em; }
+.hero .hero__stage .hero__name--last::after  { content: "♡"; top: 0.1em; right: -0.5em; font-size: 0.22em; transform: rotate(-12deg); }
+
+/* phone: stacked, tilted and tucked toward opposite sides */
+.hero .hero__stage .hero__name--first { align-self: flex-start; margin-left: 10%; transform: rotate(-6deg); }
+.hero .hero__stage .hero__name--last  { align-self: flex-end;   margin-right: 10%; transform: rotate(5deg); }
+
+/* desktop: Hanin top-left, Undac bottom-right, photo in the middle */
+@media (min-width: 900px) {
+  .hero .hero__stage .hero__name { position: absolute; margin: 0; }
+  .hero .hero__stage .hero__name--first { left: 7%;  top: 12%;    right: auto; bottom: auto; transform: rotate(-7deg); z-index: 3; }
+  .hero .hero__stage .hero__name--last  { right: 7%; bottom: 16%; left: auto;  top: auto;    transform: rotate(6deg);  z-index: 3; }
+}
+
+/* =========================================================
+   HERO: frameless photo + tidy name layout
+   ========================================================= */
+
+/* ---- Photo: no white frame, soft arch shape ---- */
+.hero__photo.polaroid {
+  background: none;
+  padding: 0;
+  rotate: 0deg;
+  border-radius: 140px 140px 14px 14px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+}
+.hero__photo.polaroid::before,
+.hero__photo.polaroid::after { display: none; }      /* lace stitching + flowers */
+.hero__photo.polaroid > img {
+  box-shadow: none;
+  border-radius: 0;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center 70%;                       /* keeps Hanin centered */
+}
+
+/* ---- Names: shared look ---- */
+.hero .hero__stage .hero__name {
+  position: relative;
+  color: #fff4ee;
+  text-shadow:
+    0 2px 0 rgba(74, 14, 25, 0.55),
+    0 0 18px rgba(240, 196, 198, 0.7),
+    0 0 42px rgba(240, 196, 198, 0.35);
+}
+.hero .hero__stage .hero__name::before,
+.hero .hero__stage .hero__name::after {
+  position: absolute;
+  font-family: var(--font-body);
+  font-size: 0.28em;
+  line-height: 1;
+  color: var(--color-accent);
+  text-shadow: none;
+}
+.hero .hero__stage .hero__name--first::after { content: "♡"; top: 0.05em; right: -0.5em; }
+.hero .hero__stage .hero__name--last::after  { content: "✦"; top: 0.1em;  right: -0.5em; }
+
+/* ---- Phone / tablet: stacked above and below the photo ---- */
+.hero .hero__stage .hero__name--first { align-self: flex-start; margin-left: 8%;  transform: rotate(-4deg); }
+.hero .hero__stage .hero__name--last  { align-self: flex-end;   margin-right: 8%; transform: rotate(4deg); }
+
+/* ---- Desktop: Hanin | photo | Undac in three columns, no overlap ---- */
+@media (min-width: 900px) {
+  .hero .hero__stage {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    column-gap: clamp(1rem, 3vw, 3rem);
+    padding-top: 2.5rem;
+  }
+  .hero .hero__stage .hero__photo.polaroid {
+    position: relative;
+    left: auto; right: auto; bottom: auto;
+    margin: 0;
+    transform: none;
+    grid-column: 2;
+  }
+  .hero .hero__stage .hero__name {
+    position: relative;
+    top: auto; right: auto; bottom: auto; left: auto;
+    margin: 0;
+  }
+  .hero .hero__stage .hero__name--first {
+    grid-column: 1;
+    justify-self: end;
+    align-self: start;
+    margin-top: 12%;
+    transform: rotate(-5deg);
+  }
+  .hero .hero__stage .hero__name--last {
+    grid-column: 3;
+    justify-self: start;
+    align-self: end;
+    margin-bottom: 12%;
+    transform: rotate(5deg);
+  }
+}
+
+/* ---- Title: "My Portfolio" in Ballet ---- */
+.hero .hero__title {
+  font-family: "Ballet", "Snell Roundhand", "Apple Chancery", "Segoe Script", cursive;
+  font-size: clamp(3.4rem, 13vw, 9rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #fff4ee;
+  text-shadow: 0 2px 0 rgba(74, 14, 25, 0.55), 0 0 22px rgba(240, 196, 198, 0.55);
+}
+
+/* ---- Names: Hanin / Undac ---- */
+.hero .hero__stage .hero__name {
+  position: relative;
+  top: auto; right: auto; bottom: auto; left: auto;
+  margin: 0;
+  transform: none;
+  text-align: center;
+  color: #fff4ee;
+  text-shadow:
+    0 2px 0 rgba(74, 14, 25, 0.55),
+    0 0 18px rgba(240, 196, 198, 0.7),
+    0 0 42px rgba(240, 196, 198, 0.35);
+}
+/* small heart and sparkle */
+.hero .hero__stage .hero__name::after {
+  position: absolute;
+  top: 0.05em;
+  right: -0.5em;
+  font-family: var(--font-body);
+  font-size: 0.28em;
+  line-height: 1;
+  color: var(--color-accent);
+  text-shadow: none;
+}
+.hero .hero__stage .hero__name--first::after { content: "♡"; }
+.hero .hero__stage .hero__name--last::after  { content: "✦"; }
+
+/* Phone: Hanin above the photo, Undac below, both centered */
+.hero .hero__stage .hero__name--first { margin-bottom: 0.4rem; }
+.hero .hero__stage .hero__name--last  { margin-top: 0.4rem; }
+
+/* Desktop: Hanin | photo | Undac in one row, centered on the photo */
+@media (min-width: 900px) {
+  .hero .hero__stage {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    column-gap: clamp(1.5rem, 4vw, 4rem);
+    padding-top: 1.5rem;
+  }
+  .hero .hero__stage .hero__photo.polaroid {
+    position: relative;
+    left: auto; right: auto; bottom: auto;
+    margin: 0;
+    transform: none;
+    grid-column: 2;
+  }
+  .hero .hero__stage .hero__name--first { grid-column: 1; justify-self: end;   text-align: right; margin: 0; }
+  .hero .hero__stage .hero__name--last  { grid-column: 3; justify-self: start; text-align: left;  margin: 0; }
+}
+
+/* ---- Title: "My Portfolio" in Ballet ---- */
+.hero .hero__title {
+  font-family: "Ballet", "Snell Roundhand", "Apple Chancery", "Segoe Script", cursive;
+  font-size: clamp(3.4rem, 13vw, 9rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #fff4ee;
+  text-shadow: 0 2px 0 rgba(74, 14, 25, 0.55), 0 0 22px rgba(240, 196, 198, 0.55);
+}
+
+/* ---- Names: Hanin / Undac ---- */
+.hero .hero__stage .hero__name {
+  position: relative;
+  top: auto; right: auto; bottom: auto; left: auto;
+  margin: 0;
+  transform: none;
+  text-align: center;
+  color: #fff4ee;
+  text-shadow:
+    0 2px 0 rgba(74, 14, 25, 0.55),
+    0 0 18px rgba(240, 196, 198, 0.7),
+    0 0 42px rgba(240, 196, 198, 0.35);
+}
+/* small heart and sparkle */
+.hero .hero__stage .hero__name::after {
+  position: absolute;
+  top: 0.05em;
+  right: -0.5em;
+  font-family: var(--font-body);
+  font-size: 0.28em;
+  line-height: 1;
+  color: var(--color-accent);
+  text-shadow: none;
+}
+.hero .hero__stage .hero__name--first::after { content: "♡"; }
+.hero .hero__stage .hero__name--last::after  { content: "✦"; }
+
+/* Phone: Hanin above the photo, Undac below, both centered */
+.hero .hero__stage .hero__name--first { margin-bottom: 0.4rem; }
+.hero .hero__stage .hero__name--last  { margin-top: 0.4rem; }
+
+/* Desktop: Hanin | photo | Undac in one row, centered on the photo */
+@media (min-width: 900px) {
+  .hero .hero__stage {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    column-gap: clamp(1.5rem, 4vw, 4rem);
+    padding-top: 1.5rem;
+  }
+  .hero .hero__stage .hero__photo.polaroid {
+    position: relative;
+    left: auto; right: auto; bottom: auto;
+    margin: 0;
+    transform: none;
+    grid-column: 2;
+  }
+  .hero .hero__stage .hero__name--first { grid-column: 1; justify-self: end;   text-align: right; margin: 0; }
+  .hero .hero__stage .hero__name--last  { grid-column: 3; justify-self: start; text-align: left;  margin: 0; }
+}
+
+/* =========================================================
+   CULTURE PAGE: fit "Assalamu Alaikum" in the hero
+   ========================================================= */
+
+/* smaller names, and never clipped */
+.page-culture .hero .hero__stage .hero__name {
+  font-size: clamp(2.6rem, 11vw, 4.5rem);
+  line-height: 1.15;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  z-index: 3;                       /* always above the photo */
+}
+
+/* Phone: Assalamu above the photo, Alaikum below, both centered */
+.page-culture .hero .hero__stage .hero__name--first { margin-bottom: 0.3rem; }
+.page-culture .hero .hero__stage .hero__name--last  { margin-top: 0.3rem; }
+
+/* Desktop: columns can shrink so nothing gets cut off */
+@media (min-width: 900px) {
+  .page-culture .hero .hero__stage {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    column-gap: clamp(1rem, 2.5vw, 2.5rem);
+  }
+  .page-culture .hero .hero__stage .hero__name {
+    font-size: clamp(2.6rem, 5vw, 4.5rem);
+  }
+  .page-culture .hero .hero__stage .hero__name--first { justify-self: end;   text-align: right; }
+  .page-culture .hero .hero__stage .hero__name--last  { justify-self: start; text-align: left; }
+}/* =========================================================
+   HOME PAGE: same name arrangement as the Culture page
+   ========================================================= */
+.hero .hero__stage .hero__name {
+  font-size: clamp(3rem, 12vw, 6rem);   /* phone */
+  line-height: 1.1;
+  max-width: 100%;
+  z-index: 3;                            /* always above the photo */
+}
+
+@media (min-width: 900px) {
+  .hero .hero__stage {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  }
+  .hero .hero__stage .hero__name {
+    font-size: clamp(3.5rem, 6.5vw, 7rem);
+  }
+}
+
+
+
+/* ==========================================================
+   FAV SONG PLAYER (music on the "My Fav Song" cards)
+   ========================================================== */
+.case-card[data-audio] { cursor: pointer; outline: none; }
+.case-card[data-audio]:focus-visible { box-shadow: 0 0 0 3px var(--color-accent-strong), var(--shadow); }
+
+/* album covers are square, so show the whole cover */
+.case-card[data-audio] .case-card__img { position: relative; aspect-ratio: 1 / 1; }
+
+.song-overlay {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  background: rgba(88, 24, 32, 0.38);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.case-card:hover .song-overlay,
+.case-card:focus-visible .song-overlay,
+.case-card.playing .song-overlay { opacity: 1; }
+
+.song-icon {
+  width: 64px; height: 64px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--color-dominant);
+  color: var(--color-secondary);
+  font-size: 1.5rem;
+  padding-left: 4px;
+  box-shadow: var(--shadow);
+}
+.case-card.playing .song-icon { padding-left: 0; font-size: 1.2rem; }
+
+.song-eq { position: absolute; left: 12px; bottom: 12px; display: none; align-items: flex-end; gap: 3px; height: 22px; }
+.case-card.playing .song-eq { display: flex; }
+.song-eq i {
+  width: 4px; height: 100%;
+  background: var(--color-dominant);
+  border-radius: 2px;
+  transform-origin: bottom;
+  animation: songEq 0.9s ease-in-out infinite;
+}
+.song-eq i:nth-child(2) { animation-delay: 0.2s; }
+.song-eq i:nth-child(3) { animation-delay: 0.4s; }
+.song-eq i:nth-child(4) { animation-delay: 0.1s; }
+@keyframes songEq { 0%, 100% { transform: scaleY(0.25); } 50% { transform: scaleY(1); } }
+
+.song-bar { height: 4px; border-radius: 2px; background: var(--color-dominant-soft); overflow: hidden; display: none; }
+.song-bar span { display: block; height: 100%; width: 0; background: var(--color-secondary); }
+.case-card.playing .song-bar { display: block; }
+
+/* =========================================================
+   HERO: photo centered, "Hanin ♡ Undac" centered below it
+   ========================================================= */
+.hero .hero__stage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: clamp(1.6rem, 3.5vw, 3rem);
+  row-gap: 0.4rem;
+  justify-items: center;
+  align-items: center;
+}
+
+/* photo: centered on its own row */
+.hero .hero__stage .hero__photo.polaroid {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  justify-self: center;
+  position: relative;
+  left: auto; right: auto; top: auto; bottom: auto;
+  margin: 0;
+  transform: none;
+}
+
+/* names: one centered line under the photo */
+.hero .hero__stage .hero__name {
+  grid-row: 2;
+  margin: 0;
+  white-space: nowrap;
+  font-size: clamp(3rem, 11vw, 6.5rem);
+  line-height: 1.1;
+}
+.hero .hero__stage .hero__name--first {
+  grid-column: 1;
+  justify-self: end;
+  text-align: right;
+  transform: rotate(-3deg);
+}
+.hero .hero__stage .hero__name--last {
+  grid-column: 2;
+  justify-self: start;
+  text-align: left;
+  transform: rotate(3deg);
+}
+
+/* heart sits in the gap between the two names, sparkle after Undac */
+.hero .hero__stage .hero__name--first::after {
+  content: "♡";
+  top: 50%;
+  right: calc(-0.5 * clamp(1.6rem, 3.5vw, 3rem) - 0.15em);
+  transform: translate(50%, -50%);
+  font-size: 0.3em;
+}
+.hero .hero__stage .hero__name--last::after {
+  content: "✦";
+  top: 0.1em;
+  right: -0.5em;
+}
+
+@media (min-width: 900px) {
+  .hero .hero__stage {
+    grid-template-columns: 1fr 1fr;
+    column-gap: clamp(1.6rem, 3.5vw, 3rem);
+  }
+  .hero .hero__stage .hero__photo.polaroid { grid-column: 1 / -1; grid-row: 1; }
+  .hero .hero__stage .hero__name { font-size: clamp(3.5rem, 6.5vw, 7rem); }
+  .hero .hero__stage .hero__name--first { grid-column: 1; justify-self: end; }
+  .hero .hero__stage .hero__name--last  { grid-column: 2; justify-self: start; }
+}
+
+/* Culture page: "Assalamu ♡ Alaikum" are longer words, so slightly smaller */
+.page-culture .hero .hero__stage .hero__name { font-size: clamp(2.3rem, 8.5vw, 5rem); }
+@media (min-width: 900px) {
+  .page-culture .hero .hero__stage .hero__name { font-size: clamp(3rem, 5.2vw, 5.5rem); }
+}

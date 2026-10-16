@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio of Hanin Undac, a frontend developer and designer." />
+  <title>Portfolio | Hanin Undac</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chonburi&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a href="#home" class="logo">H<span>.</span>U</a>
+
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMenu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav__menu" id="navMenu">
+        <li><a href="#home" class="nav__link active"></a></li>
+        <li><a href="#about" class="nav__link">About Me</a></li>
+        <li><a href="#projects" class="nav__link"></a></li>
+        <li><a href="#education" class="nav__link"></a></li>
+        <li><a href="culture.html" class="nav__link"><3MY CULTURE<3</a></li>
+        <li><a href="#contact" class="nav__link"></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- ============ HERO (burgundy cover slide) ============ -->
+    <section class="slide slide--burgundy hero" id="home">
+      ><h1 class="hero__title fade-in">My Portfolio</h1>
+
+      <div class="hero__stage">
+        <p class="hero__name hero__name--first">Undac</p>
+
+        <div class="hero__photo polaroid fade-in"></div>
+          <!-- Replace with your own photo (a cut-out PNG looks best), e.g. images/me.png -->
+          <img src="hanin-portfolio/images/pic.jpg" alt="" />
+        </div>
+
+        <p class="hero__name hero__name--last">Norhanin</p>
+      </div>
+
+      <div class="hero__footer">
+        <ul class="hero__handles">
+          <li>fb: hanin undac</li>
+          <li>ig: unhunieyall</li>
+        </ul>
+        <div class="hero__actions">
+          <a href="#projects" class="btn btn--accent"></a>
+          <a href="#contact" class="btn btn--ghost"></a>
+        </div>
+      </div>
+      <!-- Walking heels along the bottom edge of the hero (decorative) -->
+      <div class="runway" aria-hidden="true">
+        <div class="runner"><span class="heel"></span><span class="heel"></span></div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about" id="about">
+
+      <!-- About Me slide -->
+      <article class="slide slide--white about__me fade-in">
+        <div class="about__text">
+          <h2 class="display">About<br />Me</h2>
+          <p>Hi, I'm Hanin, Im jolly person who loves to laugh, even at the smallest things. im also a bit of a crybaby because i can be emotional sometimes i enjoy being around people who are friendly, kind and respectful to everyone..</p>
+          <p></p></p>
+          <blockquote class="philosophy">
+            “soft hearted, loud laughter, geniune soul.”
+            <cite></cite>
+          </blockquote>
+        </div>
+        <div class="about__photo">
+          <img src="hanin-portfolio/images/pic2.jpg" alt="Hanin working at a desk" loading="lazy" />
+        </div>
+      </article>
+
+      <!-- I Create slide -->
+      <article class="slide slide--gradient create fade-in">
+        <h2 class="display display--center">About Me</h2>
+
+        <div class="create__grid">
+          <div class="create__col">
+            <h3 class="pill pill--title">Hobbies</h3>
+            <ul class="pill-list">
+              <li>singing</li>
+              <li>dancing</li>
+              <li>cooking</li>
+              <li>baking</li>
+              <li>biking</li>
+              <li>...</li>
+            </ul>
+          </div>
+
+          <div class="create__photo">
+            <img src="https://placehold.co/360x520/F1D8D3/6F1D25?text=Photo" alt="Hanin smiling" loading="lazy" />
+          </div>
+
+          <div class="create__col">
+            <h3 class="pill pill--title">Strength</h3>
+            <ul class="pill-list">
+              <li>empathy</li>
+              <li>discipline</li>
+              <li>initiative</li>
+              <li>critical thinking</li>
+              <li>cross-cultural competence</li>
+              <li>...</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Highlights slide (skills) -->
+      <article class="slide slide--paper highlights fade-in">
+        <h2 class="display display--line"><span>Skills</span></h2>
+        
+        <ul class="highlights__grid">
+  <li class="bubble"><span class="bubble__icon">♥</span>leadership</li>
+  <li class="bubble bubble--solid"><span class="bubble__icon">♥</span>patience</li>
+  <li class="bubble"><span class="bubble__icon">♥</span>organizing</li>
+  <li class="bubble bubble--solid"><span class="bubble__icon">♥</span>cleaning</li>
+  <li class="bubble bubble--solid"><span class="bubble__icon">♥</span>active listening</li>
+  <li class="bubble"><span class="bubble__icon">♥</span>makeup application</li>
+  <li class="bubble bubble--solid"><span class="bubble__icon">♥</span>baking</li>
+  <li class="bubble"><span class="bubble__icon">♥</span>hijab styling</li>
+</ul>
+         
+        </ul>
+      </article>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="projects" id="projects">
+
+      <!-- The Case -->
+      <article class="slide slide--paper case fade-in">
+        <h2 class="display display--center">My Fav Song</h2>
+        <p class="subtitle"><span></span></p>
+
+        <div class="case__grid">
+          <article class="case-card" data-audio="audio/bad.mp3" tabindex="0" role="button" aria-label="Play bad by wave to earth">
+            <div class="case-card__img">
+              <img src="images/bad.jpg" alt="Album cover: bad by wave to earth" loading="lazy" />
+              <div class="song-overlay"><span class="song-icon">&#9654;</span></div>
+              <div class="song-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="case-card__body">
+              <h3>bad by wave to earth</h3>
+              <p>It is about how being with someone you love can make ordinary moments feel beautiful and meaningful. even when life isnt perfect.</p>
+              <ul class="tags"><li></li><li></li><li></li></ul>
+              <a href="#" class="link-arrow">play music →</a>
+              <div class="song-bar"><span></span></div>
+            </div>
+          </article>
+
+          <article class="case-card" data-audio="audio/duvet.mp3" tabindex="0" role="button" aria-label="Play duvet by boa">
+            <div class="case-card__img">
+              <img src="images/duvet.jpg" alt="Album cover: duvet by boa" loading="lazy" />
+              <div class="song-overlay"><span class="song-icon">&#9654;</span></div>
+              <div class="song-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="case-card__body">
+              <h3>duvet by boa</h3>
+              <p>It is about feeling lost, lonely and emotionally disconnected while searching for comfort and understanding in the confusing world.</p>
+              <ul class="tags"><li></li><li></li></ul>
+              <a href="#" class="link-arrow">play music <span aria-hidden="true">→</span></a>
+              <div class="song-bar"><span></span></div>
+            </div>
+          </article>
+
+          <article class="case-card" data-audio="audio/beautiful.mp3" tabindex="0" role="button" aria-label="Play beautiful by camila and bazzi">
+            <div class="case-card__img">
+              <img src="images/beautiful.jpg" alt="Album cover: beautiful by camila and bazzi" loading="lazy" />
+              <div class="song-overlay"><span class="song-icon">&#9654;</span></div>
+              <div class="song-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="case-card__body">
+              <h3>beautifull by cammila and bazzi</h3>
+              <p>Is about loving someone for who they are and seeing their beauty and worth even when they feel imperfect or insecure.</p>
+              <ul class="tags"><li></li><li></li><li></li></ul>
+              <a href="#" class="link-arrow">play music <span aria-hidden="true">→</span></a>
+              <div class="song-bar"><span></span></div>
+            </div>
+          </article>
+
+          <article class="case-card" data-audio="audio/sad-girlz-luv-money.mp3" tabindex="0" role="button" aria-label="Play sad girlz luv money by amaarae and kali uchis">
+            <div class="case-card__img">
+              <img src="images/sad-girlz-luv-money.jpg" alt="Album cover: sad girlz luv money by amaarae and kali uchis" loading="lazy" />
+              <div class="song-overlay"><span class="song-icon">&#9654;</span></div>
+              <div class="song-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="case-card__body">
+              <h3>sad girlz luv mney by ameerae&amp;kali uchis</h3>
+              <p>Is about women enjoying their independence, loving money, and feeling confident, powerful and free to live life on their own terms.</p>
+              <ul class="tags"><li></li><li></li><li></li></ul>
+              <a href="#" class="link-arrow">play music <span aria-hidden="true">→</span></a>
+              <div class="song-bar"><span></span></div>
+            </div>
+          </article>
+        </div>
+      </article>
+
+      
+    
+
+    <!-- ============ CONTACT ============ -->
+    <section class="slide slide--burgundy contact" id="contact">
+      <div class="contact__info fade-in">
+        <h2 class="display display--light">My<br />Accounts</h2>
+        <p>If you want to contact me, just reach out on any of these platforms.</p>
+ 
+        <ul class="socials" aria-label="Social media links">
+          
+          <li><a href="https://www.facebook.com/theoneandonlyhanin" target="_https://www.facebook.com/theoneandonlyhaninblank" rel="noopener noreferrer">Facebook</a></li>
+          <li><a href="https://www.instagram.com/unhunieyall/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        </ul>
+      </div>
+
+  
+      </ul>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
